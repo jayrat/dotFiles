@@ -10,7 +10,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmark/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'NLKNguyen/papercolor-theme'
 
