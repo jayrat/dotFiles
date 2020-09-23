@@ -46,6 +46,7 @@ set relativenumber
 set nohlsearch
 set smarttab
 set expandtab
+set shiftwidth=2
 set laststatus=2
 
 let g:elite_mode=1
