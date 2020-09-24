@@ -81,6 +81,14 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
+let g:ale_fixers = { 'javascript': ['eslint'] }
+
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+
+let g:ale_fix_on_save = 1
+
+
 """" Mapping for Split Navigation
 nnoremap <C-k>  <C-w><C-k>
 nnoremap <C-j>  <C-w><C-j>
