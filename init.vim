@@ -32,8 +32,11 @@ Plugin 'dense-analysis/ale'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'prettier/vim-prettier'
 
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'leafgarland/typescript-vim'
+"""" Multi-Language Syntax Plugin
+Plugin 'sheerun/vim-polyglot'
+
 Plugin 'maxmellon/vim-jsx-pretty'
 
 Plugin 'ryanoasis/vim-devicons'
@@ -49,8 +52,13 @@ call vundle#end()
 """""" End Vundel Config
 
 """ Python Support
-let g:python_host_prog = "/usr/bin/python2"
-let g:python3_host_prog = "/usr/bin/python3"
+if (has('win32'))
+  let g:python_host_prog = 'c:\Python27\python'
+  let g:python3_host_prog = 'c:\Python38\python'
+else
+  let g:python_host_prog = "/usr/bin/python2"
+  let g:python3_host_prog = "/usr/bin/python3"
+endif
 
 set number
 set relativenumber
@@ -108,10 +116,10 @@ nnoremap <C-h>  <C-w><C-h>
 
 """ Elite Mode
 if get(g:, 'elite_mode')
-	nnoremap <Up>		:resize +2<CR>
-	nnoremap <Down>		:resize -2<CR>
-	nnoremap <Left>		:vertical resize +2<CR>
-	nnoremap <Right>	:vertical resize -2<CR>
+  nnoremap <Up>		:resize +2<CR>
+  nnoremap <Down>		:resize -2<CR>
+  nnoremap <Left>		:vertical resize +2<CR>
+  nnoremap <Right>	:vertical resize -2<CR>
 endif
 
 
