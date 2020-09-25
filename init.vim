@@ -51,6 +51,9 @@ call vundle#end()
 
 """""" End Vundel Config
 
+filetype plugin on
+syntax on
+
 """ Python Support
 if (has('win32'))
   let g:python_host_prog = 'c:\Python27\python'
