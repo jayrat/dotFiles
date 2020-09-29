@@ -18,36 +18,37 @@ set encoding=UTF-8
 
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim'
 
-Plugin 'VundleVim/Vundle.vim'
+Plug 'NLKNguyen/papercolor-theme'
 
-Plugin 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'dense-analysis/ale'
+Plug 'vim-syntastic/syntastic'
+Plug 'prettier/vim-prettier'
 
-Plugin 'dense-analysis/ale'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'prettier/vim-prettier'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Plugin 'pangloss/vim-javascript'
-"Plugin 'leafgarland/typescript-vim'
-"""" Multi-Language Syntax Plugin
-Plugin 'sheerun/vim-polyglot'
+"Plug 'pangloss/vim-javascript'
+"Plug 'leafgarland/typescript-vim'
+"""" Multi-Language Syntax Plug
+Plug 'sheerun/vim-polyglot'
 
-Plugin 'maxmellon/vim-jsx-pretty'
+Plug 'maxmellon/vim-jsx-pretty'
 
-Plugin 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
-call vundle#end()
+call plug#end()
+
 
 """""" End Vundel Config
 
