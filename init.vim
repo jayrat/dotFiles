@@ -111,6 +111,20 @@ let g:ale_sign_warning = '⚠️'
 
 let g:ale_fix_on_save = 1
 
+""" Mapping for Split Navigation
+nnoremap <C-k>  <C-w><C-k>
+nnoremap <C-j>  <C-w><C-j>
+nnoremap <C-l>  <C-w><C-l>
+nnoremap <C-h>  <C-w><C-h>
+
+""" Elite Mode
+if get(g:, 'elite_mode')
+  nnoremap <Up>         :resize +2<CR>
+  nnoremap <Down>       :resize -2<CR>
+  nnoremap <Left>       :vertical resize +2<CR>
+  nnoremap <Right>      :vertical resize -2<CR>
+endif
+
 """ COC Setup
 
 " TextEdit might fail if hidden is not set.
