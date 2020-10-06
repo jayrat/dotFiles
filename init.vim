@@ -59,6 +59,8 @@ syntax on
 if (has('win32'))
   let g:python_host_prog = 'c:\Python27\python'
   let g:python3_host_prog = 'c:\Python38\python'
+  """ Set NetRW SCP Command on Windows
+  let g:netrw_scp_cmd = "C:\\windows\\System32\\OpenSSH\\scp.exe"
 else
   let g:python_host_prog = "/usr/bin/python2"
   let g:python3_host_prog = "/usr/bin/python3"
