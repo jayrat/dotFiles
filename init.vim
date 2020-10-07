@@ -57,10 +57,10 @@ syntax on
 
 """ Python Support
 if (has('win32'))
-  let g:python_host_prog = 'c:\Python27\python'
-  let g:python3_host_prog = 'c:\Python38\python'
+  let g:python3_host_prog = 'c:\Python39\python'
   """ Set NetRW SCP Command on Windows
   let g:netrw_scp_cmd = "C:\\windows\\System32\\OpenSSH\\scp.exe"
+  let g:netrw_list_cmd = "C:\\windows\\System32\\OpenSSH\\ssh.exe USEPORT HOSTNAME ls -Fa"
 else
   let g:python_host_prog = "/usr/bin/python2"
   let g:python3_host_prog = "/usr/bin/python3"
