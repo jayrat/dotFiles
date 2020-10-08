@@ -32,6 +32,9 @@ Plug 'prettier/vim-prettier'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+"" Python PEP8 Syntax
+Plug 'nvie/vim-flake8'
+
 "Plug 'pangloss/vim-javascript'
 "Plug 'leafgarland/typescript-vim'
 """" Multi-Language Syntax Plug
@@ -105,6 +108,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+let g:syntastic_python_checker = ['pyflakes']
+let g:syntastic_quiet_messages = { "type": "style" }
+
 
 let g:ale_fixers = { 'javascript': ['eslint'] }
 
@@ -126,6 +132,15 @@ if get(g:, 'elite_mode')
   nnoremap <Left>       :vertical resize +2<CR>
   nnoremap <Right>      :vertical resize -2<CR>
 endif
+
+""" Python Syntax Setup
+au BufNewFile,Bufread *.py
+  \ set tabstop=4
+  \ set softtabstop=4
+  \ set shiftwidth=4
+  \ set expandtab
+  \ set wildignore=*.pyc
+
 
 """ COC Setup
 
