@@ -30,6 +30,8 @@ Plug 'dense-analysis/ale'
 Plug 'vim-syntastic/syntastic'
 Plug 'prettier/vim-prettier'
 
+Plug 'tpope/vim-surround'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "" Python PEP8 Syntax
@@ -107,17 +109,21 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+"""let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 let g:syntastic_python_checker = ['pyflakes']
 let g:syntastic_quiet_messages = { "type": "style" }
 
+""" Replace ALE with COC
+""" let g:ale_fixers = { 'javascript': ['eslint'] }
 
-let g:ale_fixers = { 'javascript': ['eslint'] }
+""" let g:ale_sign_error = '❌'
+""" let g:ale_sign_warning = '⚠️'
 
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
+""" let g:ale_fix_on_save = 1
 
-let g:ale_fix_on_save = 1
+""" Add support for JSX to javascript files
+let g:user_emmet_settings = {'javascript': { 'extends': 'jsx' }}
 
 """ Mapping for Split Navigation
 nnoremap <C-k>  <C-w><C-k>
