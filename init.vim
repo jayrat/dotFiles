@@ -1,218 +1,191 @@
-"    ___                                  __      __          _        __  
-"   / __|    ___      _ _   __ _    __ __ \ \    / / ___     | |      / _| 
-"  | (__    / _ \    | '_| / _` |   \ \ /  \ \/\/ / / _ \    | |     |  _| 
-"   \___|   \___/   _|_|_  \__,_|   /_\_\   \_/\_/  \___/   _|_|_   _|_|_  
-" _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| 
-" "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-' 
-"
-" Filename: init.vim
-" Author: Jeremy Hawkins
-" 2020
-
-set nocompatible
-syntax on
-set nowrap
+""" NeoVim Configuration File
 set encoding=UTF-8
-
-"""""" Start Vundle Config
-
-filetype off
-
-call plug#begin('~/.vim/plugged')
-Plug 'VundleVim/Vundle.vim'
-
-Plug 'NLKNguyen/papercolor-theme'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'dense-analysis/ale'
-Plug 'vim-syntastic/syntastic'
-Plug 'prettier/vim-prettier'
-
-Plug 'tpope/vim-surround'
-
+filetype plugin indent on
+" Plugins
+call plug#begin('~/AppData/Local/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-"" Python PEP8 Syntax
-Plug 'nvie/vim-flake8'
-
-"Plug 'pangloss/vim-javascript'
-"Plug 'leafgarland/typescript-vim'
-"""" Multi-Language Syntax Plug
-Plug 'sheerun/vim-polyglot'
-
-Plug 'maxmellon/vim-jsx-pretty'
-
-Plug 'ryanoasis/vim-devicons'
-
-Plug 'mattn/emmet-vim'
-
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'mattn/emmet-vim', { 'for': ['javascript', 'jsx', 'javascriptreact', 'html', 'css'] }
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', {'do': { -> fzf#install()}}
+Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
 Plug 'jiangmiao/auto-pairs'
-
-Plug 'scrooloose/nerdtree'
-
+"Plug 'glacambre/firenvim', {'do': {_ -> firenvim#install(0)}}
+Plug 'eliba2/vim-node-inspect'
 call plug#end()
 
-
-"""""" End Vundel Config
-
-filetype plugin on
-syntax on
-
-""" Python Support
-if (has('win32'))
-  let g:python3_host_prog = 'c:\Python39\python'
-  """ Set NetRW SCP Command on Windows
-  let g:netrw_scp_cmd = "C:\\windows\\System32\\OpenSSH\\scp.exe"
-  let g:netrw_list_cmd = "C:\\windows\\System32\\OpenSSH\\ssh.exe USEPORT HOSTNAME ls -Fa"
-else
-  let g:python_host_prog = "/usr/bin/python2"
-  let g:python3_host_prog = "/usr/bin/python3"
-endif
-
-set number
-set relativenumber
-set nohlsearch
-set smarttab
-set expandtab
-set shiftwidth=2
-set laststatus=2
-
-let g:elite_mode=1
-set t_Co=256
-set colorcolumn=101
-set guifont=Hack
-colorscheme PaperColor
-
-""" Set jk and kj to Escape in Insert Mode
-imap jk <Esc>
-imap kj <Esc>
-" Try ii to exit Insert Mode
-imap ii <Esc>
-
-map <C-n> :NERDTreeToggle<CR>
-
-" Vim-Airline Configuration
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1 
-let g:airline_theme='papercolor'
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 
-
-" Syntastic Configuration
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_javascript_checkers = ['eslint']
-"""let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-let g:syntastic_python_checker = ['pyflakes']
-let g:syntastic_quiet_messages = { "type": "style" }
-
-""" Replace ALE with COC
-""" let g:ale_fixers = { 'javascript': ['eslint'] }
-
-""" let g:ale_sign_error = '❌'
-""" let g:ale_sign_warning = '⚠️'
-
-""" let g:ale_fix_on_save = 1
-
-""" Add support for JSX to javascript files
-let g:user_emmet_settings = {'javascript': { 'extends': 'jsx' }}
-
-""" Mapping for Split Navigation
-nnoremap <C-k>  <C-w><C-k>
-nnoremap <C-j>  <C-w><C-j>
-nnoremap <C-l>  <C-w><C-l>
-nnoremap <C-h>  <C-w><C-h>
-
-""" Elite Mode
-if get(g:, 'elite_mode')
-  nnoremap <Up>         :resize +2<CR>
-  nnoremap <Down>       :resize -2<CR>
-  nnoremap <Left>       :vertical resize +2<CR>
-  nnoremap <Right>      :vertical resize -2<CR>
-endif
-
-""" Python Syntax Setup
-au BufNewFile,Bufread *.py
-  \ set tabstop=4
-  \ set softtabstop=4
-  \ set shiftwidth=4
-  \ set expandtab
-  \ set wildignore=*.pyc
-
-
-""" COC Setup
-
-" TextEdit might fail if hidden is not set.
+""" General Settings
 set hidden
-"
-" " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
-"
-"" Give more space for displaying messages.
+set number
+set relativenumber
+set ruler
+set splitright
+
+set tabstop=2
+set shiftwidth=2
+set smarttab
+set expandtab
+set cindent
+set autoindent
+
+""" Enable AutoPair FlyMode
+"""let g:AutoPairsFlyMode=1
+
 set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" " delays and poor user experience.
 set updatetime=300
-"
-" " Don't pass messages to |ins-completion-menu|.
-set shortmess+=c"
+set laststatus=2
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" " diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
+set nohlsearch
+set incsearch
+
+set cursorline
+set colorcolumn=101
+if has("patch-9.1.1564")
   set signcolumn=number
 else
   set signcolumn=yes
 endif
 
-" Use tab for trigger completion with characters ahead and navigate.
-" " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
+colorscheme PaperColor
+set t_Co=256
+set background=dark
+
+""" Add Filename and type to status line
+set statusline=
+set statusline +=\ %1*\ %n\ %*            "buffer number
+set statusline +=%5*%{&ff}%*            "file format
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "file name
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
+set statusline +=%2*0x%04B\ %*          "character under cursor
+
+""" Emmet Settings
+let g:user_emmet_settings = {
+      \ 'javascript.jsx': { 'extends': 'jsx', },
+      \ 'javascriptreact' : { 'extends': 'jsx', },
+      \ 'jsx': {
+      \   'attribute_name': { 'for': 'htmlFor', 'class': 'className' },
+      \},
+      \ }
+
+""" FzF Fuzzy Finder
+
+""" Reload NeoVim Source
+nnoremap gev :e $MYVIMRC<CR>
+nnoremap gsv :so $MYVIMRC<CR>
+
+""" VimWiki
+
+""" NetRW Config
+
+""" Hide node_modules from NetRW
+let g:netrw_list_hide = '^node_modules$'
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+
+" Toggle Vexplore with Ctrl-E
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec '1wincmd w'
+      Vexplore
+      let t:expl_buf_num = bufnr("%")
+  endif
+endfunction
+map <silent> <C-E> :call ToggleVExplorer()<CR>
+
+
+""" No Arrow Keys
+nnoremap <Up> :resize +2<CR>
+nnoremap <Down> :resize -2<CR>
+nnoremap <Left> :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+""" No Arrows in Insert
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+"""" Ctrl Movement in Insert
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+"""" Other options to exit Insert
+inoremap ii <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+""" Windows Movement
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+
+
+""" Disable Python2
+let g:loaded_python_provider = 0
+""" Set Python3 Provider for Windows
+if (has('win32'))
+  let g:python3_host_prog = 'c:\python39\python'
+endif
+
+""" CoC Settings
+
+let g:coc_global_extensions = [
+      \ 'coc-pairs',
+      \ 'coc-json',
+      \ 'coc-eslint',
+      \ 'coc-prettier',
+			\ 'coc-emmet'
+      \ ]
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" Use Tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expre> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+  return !col || getline('.')[col - 1] =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
+" Usae <c-space> to trigger completion
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
-"
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" :  "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+
 
 " Use `[g` and `]g` to navigate diagnostics
-" " Use `:CocDiagnostics` to get all diagnostics of current buffer in location
-" list.
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-"" GoTo code navigation.
+" GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -224,28 +197,32 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
-  else
+  elseif (coc#rpc#ready())
     call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-"
-" " Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-"
-"" Formatting selected code.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
-" Setup formatexpr specified filetype(s).
+  " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-" Update signature help on jump placeholder.
+  " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+" Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -255,9 +232,8 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-"" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language
-" server.
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
@@ -265,13 +241,23 @@ omap af <Plug>(coc-funcobj-a)
 xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)"
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
-"
+
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -282,10 +268,9 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins
-" that
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
- set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}"
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
