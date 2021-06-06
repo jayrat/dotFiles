@@ -1,0 +1,6 @@
+{
+  "rpc.workspaceElapsedTime": true,
+  "rpc.detailsEditing": "{workspace}/{filename}@{currentline}:{currentcolumn} [{problems}]",
+  "rpc.detailsViewing": "{workspace} {currentline}:{currentcolumn} -- {problems}",
+  "javascript.suggestionActions.enabled": false
+}
