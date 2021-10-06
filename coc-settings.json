@@ -1,0 +1,4 @@
+{
+  "autoFixOnSave": true,
+  "filetypes": ["js", "jsx", "ts", "tsx"]
+}
